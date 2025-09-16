@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.calculator.ui.MainMenuController"
+            prefWidth="500" prefHeight="400">
+
+    <children>
+        <VBox spacing="15" alignment="CENTER"
+              layoutX="100" layoutY="60" prefWidth="300">
+            <Label text="Главное меню"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <Button text="Калькулятор (Закон Ома)" onAction="#openOhmsLaw"/>
+            <Button text="Калькулятор делителя напряжения" onAction="#openVoltageDivider"/>
+            <Button text="История вычислений" onAction="#openHistory"/>
+            <Button text="Выход из аккаунта" onAction="#logout"/>
+        </VBox>
+    </children>
+</AnchorPane>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.calculator.ui.LoginController"
+            prefWidth="400" prefHeight="250">
+
+    <children>
+        <VBox spacing="10" alignment="CENTER" layoutX="50" layoutY="40" prefWidth="300">
+            <Label text="Вход в систему" style="-fx-font-size: 16px;"/>
+            <TextField fx:id="usernameField" promptText="Имя пользователя"/>
+            <PasswordField fx:id="passwordField" promptText="Пароль"/>
+            <Button text="Войти" onAction="#handleLogin"/>
+            <Button text="Регистрация" onAction="#goToRegister"/>
+            <Label fx:id="messageLabel" textFill="red"/>
+        </VBox>
+    </children>
+</AnchorPane>
