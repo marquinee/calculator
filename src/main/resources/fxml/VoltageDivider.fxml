@@ -28,6 +28,7 @@
 
             <Button text="Рассчитать" onAction="#calculate"/>
             <Label fx:id="resultLabel" textFill="blue"/>
+            <Button text="Назад в меню" onAction="#goBack"/>
         </VBox>
     </children>
 </AnchorPane>

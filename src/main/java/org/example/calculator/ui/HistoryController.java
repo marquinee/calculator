@@ -5,30 +5,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import org.example.calculator.model.User;
 
-public class VoltageDividerController implements UserAwareController {
+public class HistoryController implements UserAwareController {
 
     private User currentUser;
 
-    @FXML private TextField vinField;
-    @FXML private TextField voutField;
-    @FXML private TextField toleranceField;
-    @FXML private Label resultLabel;
+    @FXML private TableView<?> historyTable;
 
     @Override
     public void setUser(User user) {
         this.currentUser = user;
+        // TODO: загрузить данные из БД в зависимости от роли (USER / ADMIN)
     }
-
-    @FXML
-    private void calculate() {
-        // TODO: логика подбора резисторов
-        resultLabel.setText("Пока заглушка: подбор комбинаций не реализован");
-    }
-
     @FXML
     private void goBack(ActionEvent event) {
         try {
@@ -48,3 +39,4 @@ public class VoltageDividerController implements UserAwareController {
         }
     }
 }
+

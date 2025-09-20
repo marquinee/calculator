@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.example.calculator.ui.MainMenuController"
-            prefWidth="500" prefHeight="400">
+            prefWidth="400" prefHeight="300">
 
-    <children>
-        <VBox spacing="15" alignment="CENTER"
-              layoutX="100" layoutY="60" prefWidth="300">
-            <Label text="Главное меню"
-                   style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
-            <Button text="Калькулятор (Закон Ома)" onAction="#openOhmsLaw"/>
-            <Button text="Калькулятор делителя напряжения" onAction="#openVoltageDivider"/>
-            <Button text="История вычислений" onAction="#openHistory"/>
-            <Button text="Выход из аккаунта" onAction="#logout"/>
-        </VBox>
-    </children>
+    <VBox spacing="15" alignment="CENTER" prefWidth="300" layoutX="50" layoutY="50">
+        <Label text="Главное меню" style="-fx-font-size: 18px;"/>
+        <Button text="Калькулятор (Закон Ома)" onAction="#goToOhmsLaw"/>
+        <Button text="Калькулятор (Делитель напряжения)" onAction="#goToVoltageDivider"/>
+        <Button text="История вычислений" onAction="#goToHistory"/>
+        <Button text="Выход" onAction="#logout"/>
+    </VBox>
 </AnchorPane>
 

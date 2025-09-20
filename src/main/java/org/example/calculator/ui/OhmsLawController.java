@@ -1,7 +1,12 @@
 package org.example.calculator.ui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.example.calculator.model.User;
 
 public class OhmsLawController implements UserAwareController {
@@ -45,6 +50,25 @@ public class OhmsLawController implements UserAwareController {
 
         } catch (Exception e) {
             resultLabel.setText("Ошибка: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void goBack(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            MainMenuController controller = loader.getController();
+            controller.setUser(currentUser);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Главное меню");
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
