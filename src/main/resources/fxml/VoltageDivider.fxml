@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
 
+<?import javafx.scene.canvas.Canvas?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.example.calculator.ui.VoltageDividerController"
             prefWidth="600" prefHeight="400">
@@ -42,7 +43,8 @@
             </columns>
         </TableView>
 
+        <Canvas fx:id="circuitCanvas" width="500" height="150" style="-fx-border-color: black;"/>
+
         <Button text="Назад в меню" onAction="#goBack"/>
     </VBox>
 </AnchorPane>
-

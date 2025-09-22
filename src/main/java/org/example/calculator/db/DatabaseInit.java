@@ -14,9 +14,14 @@ public class DatabaseInit {
     public static void init() {
         try (Connection conn = Database.getConnection();
         Statement stmt = conn.createStatement()) {
+            String adminHash = org.mindrot.jbcrypt.BCrypt.hashpw("admin", org.mindrot.jbcrypt.BCrypt.gensalt());
             stmt.execute(""" 
                 CREATE TABLE IF NOT EXISTS roles (id integer primary key autoincrement, name text unique not null)
             """);
+            stmt.executeUpdate(
+                    "INSERT OR IGNORE INTO users (id, username, password_hash, role_id) " +
+                            "VALUES (1, 'admin', '" + adminHash + "', 2)"
+            );
             stmt.execute("""
                 CREATE TABLE IF NOT EXISTS users (
                     id integer primary key autoincrement, username text not null,

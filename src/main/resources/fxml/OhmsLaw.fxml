@@ -4,32 +4,35 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.calculator.ui.OhmsLawController"
-            prefWidth="400" prefHeight="300">
-    <children>
-        <VBox spacing="15" alignment="CENTER" layoutX="50" layoutY="50" prefWidth="300">
-            <Label text="Калькулятор: Закон Ома" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+<?import javafx.scene.canvas.Canvas?>
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.calculator.ui.OhmsLawController" spacing="20" alignment="CENTER">
+    <!-- Левая часть: поля ввода -->
+    <VBox spacing="10" alignment="TOP_LEFT">
+        <Label text="Закон Ома" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 
-            <HBox spacing="10">
-                <Label text="Напряжение (V):"/>
-                <TextField fx:id="voltageField"/>
-            </HBox>
+        <HBox spacing="5">
+            <Label text="Напряжение (В):"/>
+            <TextField fx:id="voltageField"/>
+        </HBox>
 
-            <HBox spacing="10">
-                <Label text="Ток (I):"/>
-                <TextField fx:id="currentField"/>
-            </HBox>
+        <HBox spacing="5">
+            <Label text="Ток (А):"/>
+            <TextField fx:id="currentField"/>
+        </HBox>
 
-            <HBox spacing="10">
-                <Label text="Сопротивление (R):"/>
-                <TextField fx:id="resistanceField"/>
-            </HBox>
+        <HBox spacing="5">
+            <Label text="Сопротивление (Ω):"/>
+            <TextField fx:id="resistanceField"/>
+        </HBox>
 
-            <Button text="Рассчитать" onAction="#calculate"/>
-            <Label fx:id="resultLabel" textFill="blue"/>
-            <Button text="Назад в меню" onAction="#goBack"/>
-        </VBox>
-    </children>
-</AnchorPane>
+        <Button text="Рассчитать" onAction="#calculate"/>
+        <Button text="Назад" onAction="#goBack"/>
+
+        <Label fx:id="resultLabel" style="-fx-text-fill: darkblue; -fx-font-weight: bold;"/>
+    </VBox>
+
+    <!-- Правая часть: схема -->
+    <Canvas fx:id="diagramCanvas" width="400" height="300"/>
+</HBox>
+
 
