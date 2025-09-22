@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.example.calculator.dao.HistoryDao;
 import org.example.calculator.model.User;
 
 public class OhmsLawController implements UserAwareController {
@@ -30,28 +31,40 @@ public class OhmsLawController implements UserAwareController {
             Double I = parse(currentField.getText());
             Double R = parse(resistanceField.getText());
 
+            String result = null;
+            String params = "";
+
             if (V == null && I != null && R != null) {
                 V = I * R;
                 voltageField.setText(String.valueOf(V));
-                resultLabel.setText("Вычислено напряжение: " + V + " В");
+                result = "Вычислено напряжение: " + V + " В";
+                params = "I=" + I + ", R=" + R;
             } else if (I == null && V != null && R != null) {
                 I = V / R;
                 currentField.setText(String.valueOf(I));
-                resultLabel.setText("Вычислен ток: " + I + " А");
+                result = "Вычислен ток: " + I + " А";
+                params = "V=" + V + ", R=" + R;
             } else if (R == null && V != null && I != null) {
                 R = V / I;
                 resistanceField.setText(String.valueOf(R));
-                resultLabel.setText("Вычислено сопротивление: " + R + " Ом");
+                result = "Вычислено сопротивление: " + R + " Ом";
+                params = "V=" + V + ", I=" + I;
             } else {
                 resultLabel.setText("Введите ровно 2 параметра");
+                return;
             }
 
-            // TODO: сохранить результат в БД для currentUser
+            resultLabel.setText(result);
+
+            // сохраняем результат в БД
+            HistoryDao dao = new HistoryDao();
+            dao.save(currentUser.getId(), "OHM", params, result);
 
         } catch (Exception e) {
             resultLabel.setText("Ошибка: " + e.getMessage());
         }
     }
+
 
     @FXML
     private void goBack(ActionEvent event) {
@@ -71,6 +84,28 @@ public class OhmsLawController implements UserAwareController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void calculateOhm(ActionEvent event) {
+        try {
+            double voltage = Double.parseDouble(voltageField.getText());
+            double current = Double.parseDouble(currentField.getText());
+            double resistance = voltage / current;
+
+            resultLabel.setText("R = " + resistance + " Ω");
+
+            // сохраняем в историю
+            HistoryDao dao = new HistoryDao();
+            dao.save(currentUser.getId(),
+                    "OHM",
+                    "V=" + voltage + ", I=" + current,
+                    "R=" + resistance + "Ω");
+
+        } catch (Exception e) {
+            resultLabel.setText("Ошибка: " + e.getMessage());
+        }
+    }
+
 
     private Double parse(String text) {
         if (text == null || text.isEmpty()) return null;

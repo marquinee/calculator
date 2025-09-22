@@ -10,6 +10,8 @@ module org.example.calculator {
 
     opens org.example.calculator to javafx.fxml;
     opens org.example.calculator.ui to javafx.fxml;
+    opens org.example.calculator.model to javafx.base;
+
     exports org.example.calculator;
     exports org.example.calculator.ui;
 
