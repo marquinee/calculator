@@ -23,7 +23,7 @@
                 <TableColumn fx:id="colDate" text="Дата" prefWidth="100"/>
             </columns>
         </TableView>
-
+        <Button text="Очистить историю" onAction="#handleClearHistory"/>
         <Button text="Назад" onAction="#goBack"/>
     </VBox>
 </AnchorPane>

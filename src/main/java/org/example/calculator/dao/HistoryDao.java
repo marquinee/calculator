@@ -75,5 +75,26 @@ public class HistoryDao {
         }
         return list;
     }
+    public void clearByUser(int userId) {
+        String sql = "DELETE FROM history WHERE user_id = ?";
+        try (Connection conn = DatabaseInit.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clearAll() {
+        String sql = "DELETE FROM history";
+        try (Connection conn = DatabaseInit.getConnection();
+             Statement st = conn.createStatement()) {
+            st.executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

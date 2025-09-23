@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -49,6 +51,29 @@ public class HistoryController implements UserAwareController {
         ObservableList<HistoryEntry> data = FXCollections.observableArrayList(entries);
         historyTable.setItems(data);
     }
+
+    @FXML
+    private void handleClearHistory() {
+        try {
+            HistoryDao dao = new HistoryDao();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Вы уверены, что хотите очистить историю?",
+                    ButtonType.YES, ButtonType.NO);
+            confirm.showAndWait();
+
+            if (confirm.getResult() == ButtonType.YES) {
+                if ("ADMIN".equalsIgnoreCase(currentUser.getRole())) {
+                    dao.clearAll();
+                } else {
+                    dao.clearByUser(currentUser.getId());
+                }
+                historyTable.getItems().clear();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     private void goBack(ActionEvent event) {
